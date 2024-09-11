@@ -68,12 +68,14 @@ eval env (Eql e1 e2) =
     (Right (ValInt x), Right (ValInt y)) -> Right $ ValBool $ x == y
     (Right (ValBool x), Right (ValBool y)) -> Right $ ValBool $ x == y
     (Right _, Right _) -> Left "Invalid operands to equality"
+    
 eval env (If cond e1 e2) =
   case eval env cond of
     Left err -> Left err
     Right (ValBool True) -> eval env e1
     Right (ValBool False) -> eval env e2
     Right _ -> Left "Non-boolean conditional."
+    
 eval env (Let var e1 e2) =
   case eval env e1 of
     Left err -> Left err

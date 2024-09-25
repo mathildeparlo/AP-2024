@@ -3,10 +3,6 @@
 This week we will begin studying monadic programming in Haskell. This
 topic is foundational to the remainder of the course.
 
-## Slides and Material
-
-## TBA
-
 ## Suggested Reading
 
 * Philip Wadler's [The Essence of Functional Programming](essence-of-functional-programming.pdf).
@@ -84,9 +80,9 @@ instance Functor EvalM where
 
 instance Applicative EvalM where
   pure x = EvalM $ Right x
-  EvalM (Left e)  <*> _               = Left e
-  _               <*> EvalM (Left e)  = Left e
-  EvalM (Right f) <*> EvalM (Right x) = Right (f x)
+  EvalM (Left e)  <*> _               = EvalM (Left e)
+  _               <*> EvalM (Left e)  = EvalM (Left e)
+  EvalM (Right f) <*> EvalM (Right x) = EvalM (Right (f x))
 
   -- Alternatively: (<*>) = ap
 
@@ -315,8 +311,8 @@ eval (Var v) = do
     Just x -> pure x
     Nothing -> failure $ "Unknown variable: " ++ v
 eval (Add e1 e2) = do
-  x <- eval env e1
-  y <- eval env e2
+  x <- eval e1
+  y <- eval e2
   case (x, y) of
     (ValInt x', ValInt y') -> pure $ ValInt $ x' + y'
     _ -> failure "Non-integer operand"

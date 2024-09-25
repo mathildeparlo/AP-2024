@@ -57,3 +57,45 @@ follows:
 ```
 λ> :set -Wno-type-defaults
 ```
+
+## Accessing modules in `cabal repl`
+
+Plain `ghci` works only when you use exclusively the standard library.
+In other cases, we must use `cabal repl` to also load any dependencies
+specified in the `.cabal` file. After running `cabal repl`, your
+modules have been *loaded*, but their definitions are not available at
+the REPL. A module `Foo.Bar` can be made available via the `:m`
+command, as follows:
+
+```
+> :m *Foo.Bar
+```
+
+The asterisk makes unexported definitions available as well, which is
+usually desirable when testing.
+
+After modifying the module, use `:r` (without arguments) to reload any
+changes.
+
+## Useful modules
+
+AP is not a course that requires much knowledge about [the Haskell
+base library](https://hackage.haskell.org/package/base), but there are
+some modules that contain utility functions you may find useful in
+your work:
+
+* [Control.Exception](https://hackage.haskell.org/package/base-4.20.0.1/docs/Control-Exception.html#v:catch)
+
+* [Control.Monad](https://hackage.haskell.org/package/base-4.20.0.1/docs/Control-Monad.html)
+
+* [Data.Char](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Char.html)
+
+* [Data.Either](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Either.html)
+
+* [Data.Foldable](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Foldable.html)
+
+* [Data.List](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-List.html)
+
+* [Data.Maybe](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Maybe.html)
+
+* [Data.Ord](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Ord.html)

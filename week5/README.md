@@ -40,7 +40,6 @@ In particular:
   method `subExp` for enumerating the subexpressions of an expressions.
 * `APL.Error` is a new module defining a type of errors, which we will use
   instead of strings when reporting errors.
-* `APL.Parser` is the parser from week 3.
 * `APL.Eval` is the evaluator from week 2, modified to use the new error type.
 * `APL.Check` is the type checker from week 2, where `checkExp` is modified
   to return a *list* of possible errors.
@@ -132,8 +131,6 @@ Then run `sample (sized genExp)` in ghci.
 
 Extend `genExp` so that it can produce all possible expressions. Declare `Exp`
 to be an instance of `Arbitrary` with `arbitrary = sized genExp`.
-
-TODO solution
 
 ### Associativity
 
